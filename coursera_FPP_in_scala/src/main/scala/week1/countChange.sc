@@ -2,7 +2,7 @@ package week1
 
 object countChange {
 	
-	// LOGIN IN THIS CODE IS NOT CORRECT
+	// LOGIC IN THIS CODE IS NOT CORRECT
 	// WRITE CORRECT CODE WHEN YOU GET TIME
 	
   def countChange(money: Int, coins: List[Int]) = {
