@@ -21,7 +21,7 @@ object HigherOrderFunctions {
   sumCubes2(3,4)                                  //> res1: Int = 91
   sumInts(2,3)                                    //> res2: Int = 5
   
-    //tail recursive version
+  //tail recursive version
   def sum2(f:Int => Int)(a:Int, b:Int): Int = {
     def loop(a: Int, acc: Int): Int = {
       if(a > b) acc
@@ -31,5 +31,4 @@ object HigherOrderFunctions {
   }                                               //> sum2: (f: Int => Int)(a: Int, b: Int)Int
   
   sum(x => x * x, 3, 5)                           //> res3: Int = 50
-  
 }
