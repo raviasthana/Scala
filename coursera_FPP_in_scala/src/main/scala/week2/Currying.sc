@@ -11,12 +11,12 @@ object Currying {
 			else f(a) + sumF(a+1,b)
   	}
   	sumF
-  }
+  }                                               //> sum: (f: Int => Int)(Int, Int) => Int
   
-  def sumInts = sum(x => x)
-  def sumCubes = sum(x => x * x * x)
+  def sumInts = sum(x => x)                       //> sumInts: => (Int, Int) => Int
+  def sumCubes = sum(x => x * x * x)              //> sumCubes: => (Int, Int) => Int
   
-  sumInts(1,4) + sumCubes(1,4)
+  sumInts(1,4) + sumCubes(1,4)                    //> res0: Int = 110
   //directly applying cuntion sum(cube)(a,b)
   sum(x => x * x * x)(1,4)
   
