@@ -1,5 +1,7 @@
 package week2
 
+import math.abs
+
 object Assignment {
   //define the abstraction of a Set(a function that has the ability to tell
   //that element is in set or not)
@@ -48,7 +50,26 @@ object Assignment {
                                                   //> res15: Boolean = true
   contains(filter(Set(1,2,5),(x: Int) => x > 0),6) == false
                                                   //> res16: Boolean = true
-  
+
   //refer to following articlet for some understanding
   //http://stackoverflow.com/questions/13052735/is-my-understanding-of-below-scala-code-correct
+
+  /**
+   * The bounds for `forall` and `exists` are +/- 1000.
+   */
+  val bound = 1000                                //> bound  : Int = 1000
+
+  /**
+   * Returns whether all bounded integers within `s` satisfy `p`.
+   */
+  def forall(s: Set, p: Int => Boolean): Boolean = {
+    def iter(a: Int): Boolean = {
+      if (???) ???
+      else if (???) ???
+      else iter(???)
+    }
+    iter(???)
+  }                                               //> forall: (s: week2.Assignment.Set, p: Int => Boolean)Boolean
+  
+  abs(-5)                                         //> res17: Int = 5
 }
