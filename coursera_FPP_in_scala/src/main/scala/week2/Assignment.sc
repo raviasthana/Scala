@@ -74,6 +74,7 @@ object Assignment {
   forall(Set(1,2,5,10,11),x => x > 0)             //> res17: Boolean = true
   forall(Set(-20,-5,-2,1,2,5,10,11),x => x > -20) //> res18: Boolean = false
   
+  //The solution means not all elements in s satisfies !p, which in turn indicates there is at least one element in s satisfies p.
   def exists(s: Set, p: Int => Boolean): Boolean = !forall(s, x => !p(x))
                                                   //> exists: (s: week2.Assignment.Set, p: Int => Boolean)Boolean
   
@@ -87,6 +88,7 @@ object Assignment {
   
   toString(Set(1,5,7,9))                          //> res21: String = {1,5,7,9}
   
+  //For any y, if there exists an element x in s that satisfies the condition f(x) equals y, then y is in new Set map.
   def map(s: Set, f: Int => Int): Set = y => exists(s, x => f(x) == y)
                                                   //> map: (s: week2.Assignment.Set, f: Int => Int)week2.Assignment.Set
   toString(map(Set(1,3,5), x => x*2))             //> res22: String = {2,6,10}
