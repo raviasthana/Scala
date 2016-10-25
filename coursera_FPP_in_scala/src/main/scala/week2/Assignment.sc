@@ -64,12 +64,33 @@ object Assignment {
    */
   def forall(s: Set, p: Int => Boolean): Boolean = {
     def iter(a: Int): Boolean = {
-      if (???) ???
-      else if (???) ???
-      else iter(???)
+      if (a > bound) true
+      else if (s(a) && !p(a)) false
+      else iter(a+1)
     }
-    iter(???)
+    iter(-bound)
   }                                               //> forall: (s: week2.Assignment.Set, p: Int => Boolean)Boolean
   
-  abs(-5)                                         //> res17: Int = 5
+  forall(Set(1,2,5,10,11),x => x > 0)             //> res17: Boolean = true
+  forall(Set(-20,-5,-2,1,2,5,10,11),x => x > -20) //> res18: Boolean = false
+  
+  def exists(s: Set, p: Int => Boolean): Boolean = !forall(s, x => !p(x))
+                                                  //> exists: (s: week2.Assignment.Set, p: Int => Boolean)Boolean
+  
+  exists(Set(-11,1,-25),x => x > 0)               //> res19: Boolean = true
+  exists(Set(1,2,5,10,11),x => x > 20)            //> res20: Boolean = false
+  
+  def toString(s: Set): String = {
+    val xs = for (i <- -bound to bound if contains(s, i)) yield i
+    xs.mkString("{", ",", "}")
+  }                                               //> toString: (s: week2.Assignment.Set)String
+  
+  toString(Set(1,5,7,9))                          //> res21: String = {1,5,7,9}
+  
+  def map(s: Set, f: Int => Int): Set = y => exists(s, x => f(x) == y)
+                                                  //> map: (s: week2.Assignment.Set, f: Int => Int)week2.Assignment.Set
+  toString(map(Set(1,3,5), x => x*2))             //> res22: String = {2,6,10}
+  contains(map(Set(1,3,5), x => x*2),10)          //> res23: Boolean = true
+  
+  
 }
