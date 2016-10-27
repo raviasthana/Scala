@@ -23,6 +23,7 @@ object Assignment {
   def union(s: Set, t: Set): Set = x => s(x) || t(x)
                                                   //> union: (s: week2.Assignment.Set, t: week2.Assignment.Set)week2.Assignment.Se
                                                   //| t
+  
   contains(union(Set(1,2),Set(1,3)),2)            //> res4: Boolean = true
   contains(union(Set(1,2),Set(1,3)),3)            //> res5: Boolean = true
   contains(union(Set(1,2),Set(1,3)),1)            //> res6: Boolean = true

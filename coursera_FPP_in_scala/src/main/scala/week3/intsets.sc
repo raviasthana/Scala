@@ -5,6 +5,14 @@ object intsets {
   //val t1 = new NonEmpty(3, new Empty, new Empty)
   val t1 = new NonEmpty(3, Empty, Empty)          //> t1  : week3.NonEmpty = {.3.}
   val t2 = t1 incl 4                              //> t2  : week3.IntSet = {.3{.4.}}
+  val t3 = new NonEmpty(7, Empty, Empty)          //> t3  : week3.NonEmpty = {.7.}
+  val t4 = t3 incl 6 incl 8                       //> t4  : week3.IntSet = {{.6.}7{.8.}}
+  
+  val t5 = t2 union t4                            //> {.3{.4.}}
+                                                  //| {{.6.}7{.8.}}
+                                                  //| {.4.}
+                                                  //| {{.6.}7{.8.}}
+                                                  //| t5  : week3.IntSet = {{{{.3.}4.}6.}7{.8.}}
 }
 
 abstract class IntSet {
@@ -42,7 +50,9 @@ class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet {
   }
   
   def union(other: IntSet): IntSet = {
-    null
+    println(this.toString)
+    println(other.toString)
+    ((left union right) union other) incl elem
   }
 
   override def toString = "{" + left + elem + right + "}"
