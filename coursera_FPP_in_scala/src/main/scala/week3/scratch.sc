@@ -27,7 +27,7 @@ object scratch {
   
   def nthBetter[T](n: Int, list: List[T]): T = {
     if(list.isEmpty) throw new IndexOutOfBoundsException
-    else if(n == 0) list.head
+    else if(n == 0) list.head //if n == 0 then get head element
     //if n != 0 then nth element would be (n-1)th element from the remainder of the list
     //e.g. 3rd element would be 2nd in the tail
     else nthBetter(n-1, list.tail)
