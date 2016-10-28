@@ -4,7 +4,7 @@ trait List[T] {
   def isEmpty: Boolean
   def head: T
   def tail: List[T]
-  def nth(n: Int, list: List[T]): T
+  //def nth[T](n: Int, list: List[T]): T
 }
 
 class Cons[T](val head: T, val tail: List[T]) extends List[T]{
@@ -20,13 +20,21 @@ class Cons[T](val head: T, val tail: List[T]) extends List[T]{
    */
   
   def isEmpty = false //cons cells are never empty
-  
-  def nth(n: Int, list: List[T]): T = ???
+  /*
+  def nth[T](n: Int, list: List[T]): T = {
+    def loop(index: Int, tList: List[T]): T = {
+      if(tList.isEmpty) throw new IndexOutOfBoundsException("Index value [" + index + "] is out of bound")
+      else if(index == n) tList.head 
+      else loop(index + 1, tList.tail)
+    }
+    if(n < 0) throw new IndexOutOfBoundsException("Index value [" + n + "] is out of bound")
+    else loop(0,list)
+  }*/
 }
 
 class Nil[T] extends List[T]{
   def isEmpty: Boolean = true
   def head: Nothing = throw new NoSuchElementException("Nil.head")
   def tail: Nothing = throw new NoSuchElementException("Nil.tail")
-  def nth(n: Int, list: List[T]): Nothing = throw new NoSuchElementException("Nil.nth")
+  //def nth[T](n: Int, list: List[T]): Nothing = throw new NoSuchElementException("Nil.nth")
 }
