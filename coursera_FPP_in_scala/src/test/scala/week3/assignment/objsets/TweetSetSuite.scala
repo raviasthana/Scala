@@ -52,7 +52,7 @@ class TweetSetSuite extends FunSuite {
       assert(size(set5.filter(tw => tw.retweets == 20)) === 2)
     }
     println("********* Test 3 - done *************")
-  }*/
+  }
 
   test("union: set4c and set4d") {
     new TestSets {
@@ -61,25 +61,29 @@ class TweetSetSuite extends FunSuite {
     println("********* Test 4 - done *************")
   }
   
-  /*
-  ignore("union: with empty set (1)") {
+  test("union: with empty set (1)") {
     new TestSets {
       assert(size(set5.union(set1)) === 4)
     }
+    println("********* Test 5 - done *************")
   }
-
-  ignore("union: with empty set (2)") {
+  
+  test("union: with empty set (2)") {
     new TestSets {
       assert(size(set1.union(set5)) === 4)
     }
+    println("********* Test 6 - done *************")
   }
+  */
 
-  ignore("descending: set5") {
+  test("descending: set5") {
     new TestSets {
       val trends = set5.descendingByRetweet
+      //println(trends.toString())
       assert(!trends.isEmpty)
       assert(trends.head.user == "a" || trends.head.user == "b")
     }
-  }*/
+    println("********* Test 7 - done *************")
+  }
 
 }

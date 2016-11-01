@@ -1,7 +1,5 @@
 package week3.assignment.objsets
 
-import TweetReader._
-
 /**
  * A class to represent tweets.
  */
@@ -61,22 +59,40 @@ abstract class TweetSet {
    * Calling `mostRetweeted` on an empty set should throw an exception of
    * type `java.util.NoSuchElementException`.
    *
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def mostRetweeted: Tweet = ???
-
+  def mostRetweeted: Tweet
+  def leastRetweeted: Tweet
+  
+  def mostRetweetedHelper(mostRT: Tweet): Tweet
+  def leastRetweetedHelper(mostRT: Tweet): Tweet
+  
+  def isEmpty: Boolean
+  
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
    * in descending order. In other words, the head of the resulting list should
    * have the highest retweet count.
    *
    * Hint: the method `remove` on TweetSet will be very useful.
-   * Question: Should we implment this method here, or should it remain abstract
+   * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def descendingByRetweet: TweetList = ???
-
+  def descendingByRetweet: TweetList = descendingByRetweetHelper(this,Nil)
+  
+  def descendingByRetweetHelper(ts: TweetSet, acc: TweetList): TweetList = {
+    //ts.foreach { x => println(x.toString()) }
+    if(ts.isEmpty)
+      acc
+    else {
+      val lrT = ts.leastRetweeted
+      println("-----------------------")
+      println(lrT.toString())
+      ts.descendingByRetweetHelper(ts.remove(lrT), new Cons(lrT,acc))
+    }
+  }
+  
   /**
    * The following methods are already implemented
    */
@@ -109,6 +125,16 @@ class Empty extends TweetSet {
   
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
 
+  def union(that: TweetSet): TweetSet = that
+  
+  def mostRetweeted: Tweet = throw new java.util.NoSuchElementException("Empty TweetSet")
+  def leastRetweeted: Tweet = throw new java.util.NoSuchElementException("Empty TweetSet")
+  
+  def mostRetweetedHelper(mostRT: Tweet): Tweet = mostRT
+  def leastRetweetedHelper(mostRT: Tweet): Tweet = mostRT
+    
+  def isEmpty = true
+  
   /**
    * The following methods are already implemented
    */
@@ -120,20 +146,35 @@ class Empty extends TweetSet {
   def remove(tweet: Tweet): TweetSet = this
 
   def foreach(f: Tweet => Unit): Unit = ()
-  
-  def union(that: TweetSet): TweetSet = that
 }
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = {
-    println("??" + elem.toString())
+    //println("??" + elem.toString())
     if(p(elem))
       left.filterAcc(p, right.filterAcc(p, acc.incl(elem)))
     else 
       left.filterAcc(p, right.filterAcc(p, acc))
   }
 
+  def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
+
+  def mostRetweeted: Tweet = mostRetweetedHelper(elem)
+  def leastRetweeted: Tweet = leastRetweetedHelper(elem)
+  
+  def mostRetweetedHelper(mostRT: Tweet): Tweet = {
+    val mrTweet = if (elem.retweets > mostRT.retweets) elem else mostRT
+    right.mostRetweetedHelper(left.mostRetweetedHelper(mrTweet))
+  }
+
+  def leastRetweetedHelper(leastRT: Tweet): Tweet = {
+    //println("leastRT.rt: " + leastRT.retweets + ", elem.rt: " + elem.retweets)
+    val lrTweet = if (elem.retweets < leastRT.retweets) elem else leastRT
+    right.leastRetweetedHelper(left.leastRetweetedHelper(lrTweet))
+  }
+
+  def isEmpty = false
   /**
    * The following methods are already implemented
    */
@@ -162,7 +203,6 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     right.foreach(f)
   }
   
-  def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
 }
 
 trait TweetList {
@@ -180,10 +220,12 @@ object Nil extends TweetList {
   def head = throw new java.util.NoSuchElementException("head of EmptyList")
   def tail = throw new java.util.NoSuchElementException("tail of EmptyList")
   def isEmpty = true
+  override def toString() = "."
 }
 
 class Cons(val head: Tweet, val tail: TweetList) extends TweetList {
   def isEmpty = false
+  override def toString() = head.toString() + "\n" + tail.foreach { x => x.toString() }
 }
 
 object GoogleVsApple {
