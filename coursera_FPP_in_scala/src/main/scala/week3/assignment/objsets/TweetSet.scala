@@ -41,7 +41,7 @@ abstract class TweetSet {
   def filter(p: Tweet => Boolean): TweetSet = filterAcc(p, new Empty)
 
   /**
-   * This is a helper method for `filter` that propagetes the accumulated tweets.
+   * This is a helper method for `filter` that propagates the accumulated tweets.
    */
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet
 
@@ -87,8 +87,8 @@ abstract class TweetSet {
       acc
     else {
       val lrT = ts.leastRetweeted
-      println("-----------------------")
-      println(lrT.toString())
+      //println(lrT.toString())
+      //println("----------------------------------------------------")
       ts.descendingByRetweetHelper(ts.remove(lrT), new Cons(lrT,acc))
     }
   }
@@ -131,7 +131,7 @@ class Empty extends TweetSet {
   def leastRetweeted: Tweet = throw new java.util.NoSuchElementException("Empty TweetSet")
   
   def mostRetweetedHelper(mostRT: Tweet): Tweet = mostRT
-  def leastRetweetedHelper(mostRT: Tweet): Tweet = mostRT
+  def leastRetweetedHelper(leastRT: Tweet): Tweet = leastRT
     
   def isEmpty = true
   
@@ -158,7 +158,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       left.filterAcc(p, right.filterAcc(p, acc))
   }
 
-  def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
+  //def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
+  def union(that: TweetSet): TweetSet = that.filterAcc(tw => true, this)
 
   def mostRetweeted: Tweet = mostRetweetedHelper(elem)
   def leastRetweeted: Tweet = leastRetweetedHelper(elem)
@@ -185,7 +186,7 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     else true
 
   def incl(x: Tweet): TweetSet = {
-    println(x.toString() + " | x.text: " + x.text + " | elem.text: " + elem.text)
+    //println(x.toString() + " | x.text: " + x.text + " | elem.text: " + elem.text)
     
     if (x.text < elem.text) new NonEmpty(elem, left.incl(x), right)
     else if (elem.text < x.text) new NonEmpty(elem, left, right.incl(x))
@@ -229,20 +230,38 @@ class Cons(val head: Tweet, val tail: TweetList) extends TweetList {
 }
 
 object GoogleVsApple {
+  
   val google = List("android", "Android", "galaxy", "Galaxy", "nexus", "Nexus")
   val apple = List("ios", "iOS", "iphone", "iPhone", "ipad", "iPad")
 
-  lazy val googleTweets: TweetSet = ???
-  lazy val appleTweets: TweetSet = ???
+  lazy val googleTweets: TweetSet = TweetReader.allTweets.filter(tw => google.exists(tw.text.contains(_)))
+  lazy val appleTweets: TweetSet = TweetReader.allTweets.filter(tw => apple.exists(tw.text.contains(_)))
+
+  //lazy val googleTweets: TweetSet = TweetReader.allTweets.filter { tw => google.exists { tw.text.contains(_) }}
+  //lazy val appleTweets: TweetSet = TweetReader.allTweets.filter { tw => apple.exists { tw.text.contains(_) }}
 
   /**
    * A list of all tweets mentioning a keyword from either apple or google,
    * sorted by the number of retweets.
    */
-  lazy val trending: TweetList = ???
+  lazy val trending: TweetList = (googleTweets union appleTweets).descendingByRetweet
+  
+  def asSet(tweets: TweetSet): Set[Tweet] = {
+    var res = Set[Tweet]()
+    tweets.foreach(res += _)
+    res
+  }
+
+  def size(set: TweetSet): Int = asSet(set).size  
 }
 
 object Main extends App {
   // Print the trending tweets
-  GoogleVsApple.trending foreach println
+  println("Size of Google related tweets: " + GoogleVsApple.size(GoogleVsApple.googleTweets))
+  println("Size of Apple related tweets: " + GoogleVsApple.size(GoogleVsApple.appleTweets))
+  
+  GoogleVsApple.googleTweets foreach println
+  println("=================================================================================")
+  GoogleVsApple.appleTweets foreach println
+  //GoogleVsApple.trending foreach println
 }
