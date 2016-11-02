@@ -66,7 +66,7 @@ abstract class TweetSet {
   def leastRetweeted: Tweet
   
   def mostRetweetedHelper(mostRT: Tweet): Tweet
-  def leastRetweetedHelper(mostRT: Tweet): Tweet
+  def leastRetweetedHelper(leastRT: Tweet): Tweet
   
   def isEmpty: Boolean
   
