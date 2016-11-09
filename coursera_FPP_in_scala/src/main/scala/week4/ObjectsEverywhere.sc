@@ -2,6 +2,11 @@ package week4
 
 object ObjectsEverywhere {
   println("Objects Everywhere")                   //> Objects Everywhere
+  
+  val l1 = scala.List("one","three","eight")      //> l1  : List[String] = List(one, three, eight)
+  var l2 = scala.List("two","five","seven")       //> l2  : List[String] = List(two, five, seven)
+  
+  val res = l1 ::: l2                             //> res  : List[String] = List(one, three, eight, two, five, seven)
 }
 
 // class representing natural numbers
