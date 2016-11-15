@@ -43,33 +43,8 @@ object nqueens {
 																//as well to append in each element in collection before printing
 	}                                         //> show: (queens: List[Int])String
 	
+	queens(4)                                 //> res0: Set[List[Int]] = Set(List(1, 3, 0, 2), List(2, 0, 3, 1))
 	//(queens(4) map show) mkString "\n"
 	//(queens(8) map show) mkString "\n"
-	(queens(8) take 3 map show) mkString "\n" //> res0: String = "
-                                                  //| * * * * * X * * 
-                                                  //| * * * X * * * * 
-                                                  //| * X * * * * * * 
-                                                  //| * * * * * * * X 
-                                                  //| * * * * X * * * 
-                                                  //| * * * * * * X * 
-                                                  //| X * * * * * * * 
-                                                  //| * * X * * * * * 
-                                                  //| 
-                                                  //| * * * * X * * * 
-                                                  //| * * * * * * X * 
-                                                  //| * X * * * * * * 
-                                                  //| * * * X * * * * 
-                                                  //| * * * * * * * X 
-                                                  //| X * * * * * * * 
-                                                  //| * * X * * * * * 
-                                                  //| * * * * * X * * 
-                                                  //| 
-                                                  //| * * * * * X * * 
-                                                  //| * * X * * * * * 
-                                                  //| * * * * * * X * 
-                                                  //| * * * X * * * * 
-                                                  //| X * * * * * * * 
-                                                  //| * * * * * * * X 
-                                                  //| * X * * * * * * 
-                                                  //| * * * * X * * * "
+	//(queens(8) take 3 map show) mkString "\n"
 }
