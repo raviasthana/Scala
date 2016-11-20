@@ -87,35 +87,29 @@ object Anagrams {
    *  in the example above could have been displayed in some other order.
    */
   def combinations(occurrences: Occurrences): List[Occurrences] = {
+    (occurrences foldRight List[Occurrences](Nil)) {
+      case ((c,n),acc) =>
+        {
+          acc ::: (for{
+                    comb <- acc
+                    i <- 1 to n
+                  } yield (c,i) :: comb
+                )
+        }     
+    }    
     /*
-    def combine(remOcc: Occurrences): List[Occurrences] = {
-      remOcc match {
-        case Nil => List(List())
-        case List(occ) =>
-          occ match {
-            case (c, n) => {
-              for {
-                
-                i <- 1 until n
-              } yield List(List(c, i))
-            }
-          }
+    def combAcc(restOcc: Occurrences, acc: List[Occurrences]): List[Occurrences] = {
+      restOcc match {
+        case Nil => acc
+        case x :: xs => println(x);
+          acc ::: (for{
+            comb <- combAcc(xs,acc)
+            n <- 1 to x._2
+          } yield (x._1,n) :: comb
+        )
       }
     }
-    combine(occurrences)
-    */
-    
-    def combAcc(pair: (Char, Int), remOcc: Occurrences, acc: List[Occurrences]): List[Occurrences] = {
-      pair match {
-        case (c, 1) => 
-          if(remOcc.size == 0) 
-             List(List()) ::: acc ::: List(List((c, 1)))
-          else
-             combAcc(remOcc.head, remOcc.tail, acc ::: List(List((c, 1))))
-        case (c, n) => combAcc((c, n-1),remOcc,acc ::: List(List((c, n)))) 
-      }
-    }
-    combAcc(occurrences.head, occurrences.tail, List())
+    combAcc(occurrences, List(List()))*/
   }
   
 
