@@ -24,8 +24,7 @@ object Anagrams {
   /** The dictionary is simply a sequence of words.
    *  It is predefined and obtained as a sequence using the utility method `loadDictionary`.
    */
-  //val dictionary: List[Word] = forcomp.loadDictionary
-  val dictionary: List[Word] = List("eat", "tea", "ate", "this", "shit", "every", "my", "en", "as", "sean", "man", "yes", "men", "say", "sane", "me")
+  val dictionary: List[Word] = forcomp.loadDictionary
 
   /** Converts the word into its character occurrence list.
    *
@@ -35,7 +34,7 @@ object Anagrams {
    *  Note: you must use `groupBy` to implement this method!
    */
   def wordOccurrences(w: Word): Occurrences = 
-    w.toLowerCase.toList.groupBy(identity).mapValues(_.size) toList
+    w.toLowerCase.toList.groupBy(identity).mapValues(_.size).toList.sorted
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences = 
@@ -60,9 +59,12 @@ object Anagrams {
     dictionary groupBy wordOccurrences
 
   /** Returns all the anagrams of a given word. */
-  def wordAnagrams(word: Word): List[Word] =
-    dictionaryByOccurrences(wordOccurrences(word))
-
+    
+  def wordAnagrams(word: Word): List[Word] = {
+    val wOcc = wordOccurrences(word)
+    if(dictionaryByOccurrences.contains(wOcc)) dictionaryByOccurrences(wOcc)
+    else List()
+  }
   /**
    * Returns the list of all subsets of the occurrence list.
    *  This includes the occurrence itself, i.e. `List(('k', 1), ('o', 1))`

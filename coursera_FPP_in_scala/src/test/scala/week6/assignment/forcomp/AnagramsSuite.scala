@@ -1,4 +1,4 @@
-package forcomp
+package week6.assignment.forcomp
 
 import org.scalatest.FunSuite
 
@@ -30,7 +30,9 @@ class AnagramsSuite extends FunSuite  {
 
 
   test("word anagrams: married") {
-    assert(wordAnagrams("married").toSet === Set("married", "admirer"))
+    val wa = wordAnagrams("married")
+    println(wa)
+    assert(wa.toSet === Set("married", "admirer"))
   }
 
   test("word anagrams: player") {
