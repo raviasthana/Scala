@@ -1,3 +1,5 @@
+package week6.assignment.forcomp
+
 package object forcomp {
   val dictionaryPath = List("forcomp", "linuxwords.txt")
 
