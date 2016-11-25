@@ -1,14 +1,14 @@
 package week4
 
 object Variance {
-  println("Welcome to the Scala worksheet")
+  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
   
   /*
   Some types should be the covariant, but others should not
   
   A type that accepts mutations of its elements should NOT be the covariant
   
-  Mutable types can be covaiant, if some conditions on methods are met
+  Mutable types can be covariant, if some conditions on methods are met
   
   Say C[T] is a parameterized type and A, B are types such that A <: B
   In general there are three possible relationships between C[A] and C[B]
@@ -24,7 +24,7 @@ object Variance {
   class C[A] {....} declares that C is a nonvariant i.e. C[A] and C[B] are not related
   
   ------------------------------------------------------------------------------------
-  There is following rule for subtying between funtion types
+  There is following rule for subtying between function types
   
   if A2 <: A1 and B1 <: B2
   
