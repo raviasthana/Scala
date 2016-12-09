@@ -1,11 +1,10 @@
-package week1.assignment.bloxorz
+package week2.assignment.bloxorz
 
 import org.scalatest.FunSuite
-
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
-import Bloxorz._
+import week2.assignment.bloxorz._
 
 @RunWith(classOf[JUnitRunner])
 class BloxorzSuite extends FunSuite {

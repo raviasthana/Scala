@@ -37,6 +37,6 @@ object BloxorzSolution {
   
   val lst = List((2,'a'),(3,'b'),(5,'c'),(8,'d'),(10,'e'))
                                                   //> lst  : List[(Int, Char)] = List((2,a), (3,b), (5,c), (8,d), (10,e))
-  lst filter(p => p._1 % 2 == 0)
+  lst filter(p => p._1 % 2 == 0)                  //> res3: List[(Int, Char)] = List((2,a), (8,d), (10,e))
   
 }

@@ -1,4 +1,4 @@
-package week1.assignment.bloxorz
+package week2.assignment.bloxorz
 
 /**
  * This trait defines an infinite terrain, where the block can

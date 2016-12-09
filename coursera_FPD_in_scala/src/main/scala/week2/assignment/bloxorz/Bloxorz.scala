@@ -1,4 +1,4 @@
-package week1.assignment.bloxorz
+package week2.assignment.bloxorz
 
 /**
  * A main object that can be used to execute the Bloxorz solver
