@@ -134,9 +134,5 @@ object ListOperations {
     
   squareList1(List(2,3,4))                        //> res9: List[Int] = List(4, 9, 16)
 	squareList2(List(2,3,4))                  //> res10: List[Int] = List(4, 9, 16)
-	
-	def posElements(xs: List[Int]): List[Int] =
-	  xs filter (x => x > 0)                  //> posElements: (xs: List[Int])List[Int]
-	posElements(List(1,3,-4,2,5))             //> res11: List[Int] = List(1, 3, 2, 5)
 	  
 }
