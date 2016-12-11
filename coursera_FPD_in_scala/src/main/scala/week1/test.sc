@@ -7,7 +7,7 @@ object test {
                                                   //> f  : String => String = <function1>
   f("ping")                                       //> res0: String = pong
   //f("abc")
-  
+ 
   val f2: PartialFunction[String,String] = {case "ping" => "pong"}
                                                   //> f2  : PartialFunction[String,String] = <function1>
   f2.isDefinedAt("ping")                          //> res1: Boolean = true
@@ -71,7 +71,9 @@ object test {
 			
 	//books flatMap ( b => for (a <- b.authors if a.startsWith("Bird") ) yield b.title )
 	//books flatMap ( b => for (a <- b.authors withFilter(a => a.startsWith("Bird") )) yield b.title )
-	//books flatMap ( b => b.authors withFilter(a => a.startsWith("Bird") ) map (a => b.title) )
+	books flatMap ( b => b.authors withFilter(a => a.startsWith("Bird") ) map (a => b.title) )
+                                                  //> res6: scala.collection.immutable.Set[String] = Set(Introduction to Function
+                                                  //| al Programming)
 }
 
 case class Book(title: String, authors: List[String])
