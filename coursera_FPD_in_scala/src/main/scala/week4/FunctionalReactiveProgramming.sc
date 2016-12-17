@@ -1,9 +1,6 @@
 package week4
 
-object FunctionalReactiveProgramming {
-  println("Welcome to the Scala worksheet")
-}
-
+import week4.frp.Signal
 /*
 Reactive programming is about reacting to sequences of events that happen in time
 
@@ -27,24 +24,25 @@ Functional view: Aggregate an event sequence into a signal
 	
 		
 */
-
-object accounts {
-	def consolidated(accts: List[BankAccountFRP]): Signal[Int] =
-		Signal(accts.map(_.balance()).sum)
+object FunctionalReactiveProgramming {
+  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  
+  def consolidated(accts: List[BankAccountFRP]): Signal[Int] =
+	Signal(accts.map(_.balance()).sum)        //> consolidated: (accts: List[week4.BankAccountFRP])week4.frp.Signal[Int]
 	
-	val a = new BankAccountFRP()
-	val b = new BankAccountFRP()
+	val a = new BankAccountFRP()              //> a  : week4.BankAccountFRP = week4.BankAccountFRP@5f2050f6
+	val b = new BankAccountFRP()              //> b  : week4.BankAccountFRP = week4.BankAccountFRP@3b81a1bc
 	
-	val c = consolidated(List(a,b))
-	c()
+	val c = consolidated(List(a,b))           //> c  : week4.frp.Signal[Int] = week4.frp.Signal@3a03464
+	c()                                       //> res0: Int = 0
 	
 	a deposit 20
-	c()
+	c()                                       //> res1: Int = 0
 	
 	b deposit 30
-	c()
+	c()                                       //> res2: Int = 0
 	
-	val xchange = Signal(246.00)
-	val inDollar = Signal(c() * xchange())
-	inDollar()
+	val xchange = Signal(268.00)              //> xchange  : week4.frp.Signal[Double] = week4.frp.Signal@6df97b55
+	val inDollar = Signal(c() * xchange())    //> inDollar  : week4.frp.Signal[Double] = week4.frp.Signal@3cbbc1e0
+	inDollar()                                //> res3: Double = 0.0
 }

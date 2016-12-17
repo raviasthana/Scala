@@ -1,5 +1,7 @@
 package week4
 
+import week4.frp.Var
+
 class BankAccountFRP {
   val balance = Var(0) //balance is now a Signal
   def deposit(amount: Int): Unit = {
