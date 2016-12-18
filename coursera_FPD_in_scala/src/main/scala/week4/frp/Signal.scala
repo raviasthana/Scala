@@ -1,5 +1,7 @@
 package week4.frp
 
+import scala.util.DynamicVariable
+
 /**
  * Each Signal maintains
  * - it's current value
@@ -44,7 +46,7 @@ class Signal[T](expr: => T) {
   //private val caller = new StackableVariable[Signal[_]](NoSignal)
   //API of DynamicVariable matches our implementation of StackableVariable
   //DynamicVariable gives us thread local state
-  private val caller = new StackableVariable[Signal[_]](NoSignal)
+  private val caller = new DynamicVariable[Signal[_]](NoSignal)
   private var myExpr: () => T = _ //uninitialized
   private var myValue: T = _
   private var observers: Set[Signal[_]] = Set()
