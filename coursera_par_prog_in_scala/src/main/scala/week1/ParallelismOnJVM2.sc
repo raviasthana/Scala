@@ -15,7 +15,7 @@ package week1
   - small subset of rules (just 2 here)
   
   1) Two threads writing to separate locations in memory do not need synchronization
-  2) A thread X that calls join on another thread Y is gyaranteed to see all writes
+  2) A thread X that calls join on another thread Y is guaranteed to see all writes
   by thread Y after join returns.
   
   */
@@ -38,7 +38,7 @@ object ParallelismOnJVM2 {
   val a2 = new Account(70000)                     //> a2  : week1.Account = week1.Account@57829d67
   
   val t = startThread(a1, a2, 15000)              //> t  : Thread = Thread[Thread-0,5,main]
-  val s = startThread(a2, a1, 15000)              //> s  : Thread = Thread[Thread-1,5,main]\
+  val s = startThread(a2, a1, 15000)              //> s  : Thread = Thread[Thread-1,5,main]-
   t.join() //deadlock @ t.join
   s.join()
 }
