@@ -1,0 +1,127 @@
+=> Scala goes further than any other language in fusing object-oriented and functional
+programming into a uniform language design. For example, where other languages might 
+have objects and functions as two different concepts, in Scala a function value is an 
+object. Function types are classes that can be inherited by subclasses.
+
+=> Scala is an object-oriented language in pure form (no primitive data types or static
+fields): every value is an object and every operation is a method call.
+
+=> 'Traits'in Scala are like interfaces in Java, but they can also have method 
+implementations and even fields. 
+
+=> Scala is full blown functional language. Functional programming is guided by two main
+ideas.
+	1) Functions are first-class values
+	-----------------------------------
+	In a functional language, a function is a value of the same status as, say, an integer
+	or a string. You can pass functions as arguments to other functions, return them as
+	results from functions or store them in variables. You can also define a function
+	inside another function, just as you can define an integer value inside a function.
+	
+	You can define functions without giving them a name, sprinkling your code with function
+	literals as easily as you might write integer literals like 42.
+	
+	Functions that are first-class values provide a convenient means for abstracting 
+	over operations and creating new control structures. This generalization of functions
+	provides great expressiveness, which often leads to very legible and concise programs.
+	
+	2) Operations of a program should map input values to output values rather than change data in place
+	----------------------------------------------------------------------------------------------------
+	Immutable data-structures are one of the cornerstones of functional programming. The Scala libraries
+	define many more immutable data types on top of those found in Java APIs(e.g. String). Scala has
+	immutable 'lists', 'tuples', 'maps' and 'sets'.
+	
+	Another way of stating this idea of functional programming is that methods should not have any 
+	side-effects. They should communicate with their environment only by taking arguments and returning
+	results. For instance, the 'replace' method in Java's 'string' class fits this description. It takes
+	a string and two characters and yields a new string where all occurrences of one character are replaced
+	by the other. There is no other effect of calling 'replace'. Methods like 'replace' are called 
+	"referentially transparent", which means that for any given input the method call could be replaced by
+	its result without affecting the program's semantics.
+	
+	Functional languages encourage immutable data structures and referentially transparent methods. Some
+	functional languages even require them. Scala gives you a choice. When you want to, you can write in
+	an 'imperative' style, which is what programming with mutable data and side effects is called. But
+	Scala generally makes it easy to avoid imperative constructs when you want because good functional 
+	alternatives exist. 
+	
+=> Scala is compatible
+	Scala programs compile to JVM bytecodes. Their run-time performance is usually on-par with Java 
+	programs. Scala code can call Java methods, access Java fields, inherit from Java classes, and 
+	implement Java interfaces. None of this requires special syntax, explicit interface descriptions,
+	or glue code. In fact, almost all Scala code makes heavy use of Java libraries, often without 
+	programmers being aware of this fact.
+	
+	Scala code can also be invoked from Java code. This is sometimes a bit more subtle, because Scala
+	is a richer language than Java, so some of Scala's more advanced features need to be encoded before
+	they can be mapped to Java.
+	
+=> Scala is concise
+	Scala programs tend to be short. Scala syntax avoids some of the boilerplate that burdens Java 
+	programs. For example, semicolons are optional and class declaration with private variable and 
+	constructors can be written in one line in Scala.
+	
+	Scala's type inference is another factor that contributes to its conciseness. Repetitive type 
+	information can be left out, so programs become less cluttered and more readable. 
+	
+	Probably the most important key to compact code is code you don't have to write because its done in
+	a library for you. Scala gives many tools to define powerful libraries that let you capture and factor
+	out common behaviour. For instance, different aspects of library classes can be separated out into 
+	traits, which can be mixed together in flexible ways. Or, library methods can be parameterized with
+	operations, which lets you define constructs that are, in effect, your own control structures. 
+	Together, these constructs allow the definition of libraries that are both high-level and flexible 
+	to use.
+
+=> Scala is high-level
+	Scala helps you manage complexity by letting you raise the level of abstraction in the interfaces you
+ 	design and use. For example;
+ 	
+ 	Java code (pre-Java8) to find if a string has upper case letter
+ 	--------------------------------------------------------------
+ 	boolean nameHasUpperCase = false;
+ 	for(int i = 0; i < name.length(); ++i){
+ 		if(Character.isUpperCase(name.charAt(i))){
+ 			nameHasUpperCase = true;
+ 			break;
+ 		}
+ 	}
+ 	
+ 	Scala code
+ 	----------
+ 	val nameHasUpperCase = name.exists(_.isUpper)
+ 	
+ 	Java code treats strings as low-level entities that are stepped through character by character in a
+ 	loop. Scala code treats same string as high-level sequences of characters that can be queried with
+ 	predicates. Clearly the Scala code is much shorter and - for trained eyes - easier to understand than
+ 	the Java code. So the code weighs less heavily on the total complexity budget. It also gives you less
+ 	opportunity to make mistakes.
+ 	
+ 	The predicate "_.toUpper" is an example of 'function literal' in Scala. It describes a function that
+ 	takes a character argument(represented by the underscore character) and tests whether it is an upper
+ 	case letter.
+ 	
+ 	Java8 code
+ 	----------
+ 	boolean nameHasUpperCase = name.chars().anyMatch( (int ch) -> Character.isUpperCase((Char)ch) );
+ 	
+ 	Java8 code is still more verbose than equivalent Scala code.
+ 	
+ 	Scala's functional programming style also offers high-level 'reasoning principles' for programming.
+ 	These reasoning principles give many useful laws that can be used to better understand or to 
+ 	refactor the code.
+	 
+=> Scala is statically typed
+	A static type system classifies variables and expressions according to the kinds of values they hold
+	and compute. Scala stands out as a language with a very advanced static type system.
+	Starting from a system of nested class types much like Java's, it allows you to parameterize types
+	with generics, to combine types using intersections, and to hide details of types using abstract types.
+	These give a strong foundation for building and composing your own types, so that you can design
+	interfaces that are at the same time safe and flexible to use.
+	
+	Scala's type system addresses nicely two of the usual concerns about static typing: Verbosity is 
+	avoided through type inference, and flexibility is gained through pattern matching and several new
+	ways to write and compose types. With these impediments out of the way, the classical benefits of 
+	static type systems can be better appreciated. Among the most important of these benefits are
+	verifiable properties of program abstractions, safe re-factorings, and better documentation. 
+	
+		 
