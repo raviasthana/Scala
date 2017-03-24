@@ -1,0 +1,12 @@
+=> Packages in scala are similar to packages in Java. They partition the global namespace and provide
+a mechanism for information hiding.
+
+=> All of Java's primitive types have corresponding classes in the 'scala' Pacakage.
+	scala.Int corresponds to Java 'int'
+	scala.Boolean corresponds to Java 'boolean'
+	scala.Float corresponds to Java 'float' and so on...
+	
+	And when Scala code is compiled to Java bytecode then Scala compiler will use Java's primitive 
+	types 'where possible' to give the performance benefits of the primitive types.
+	
+
